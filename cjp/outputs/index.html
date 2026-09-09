@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Казахтелеком — 1437</title>
+  <style>
+    :root { --navy:#031b43; --deep:#010e29; --blue:#087bf0; --sky:#3ebaf8; --gold:#e3b45b; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; overflow:hidden; background:var(--deep); color:#fff; font-family:Arial, Helvetica, sans-serif; }
+    .screen { min-height:100vh; position:relative; display:grid; grid-template-rows:auto 1fr auto; padding:clamp(24px,4.3vw,70px) clamp(24px,7vw,120px) 28px; isolation:isolate; background:radial-gradient(ellipse 58% 75% at 78% 55%, #0b4b94 0%, transparent 63%), linear-gradient(118deg,#010b25 0%,#042554 54%,#031533 100%); }
+    .screen::before,.screen::after { content:""; position:absolute; inset:auto; pointer-events:none; z-index:-1; }
+    .screen::before { width:62vw; height:62vw; right:-23vw; bottom:-27vw; border:1px solid rgba(86,185,255,.24); border-radius:50%; box-shadow:0 0 0 44px rgba(49,145,237,.06), 0 0 0 92px rgba(49,145,237,.04); }
+    .screen::after { width:42vw; height:42vw; left:-19vw; top:11vh; border:1px solid rgba(227,180,91,.15); border-radius:50%; }
+    header { display:flex; justify-content:space-between; align-items:center; font-size:clamp(13px,1.25vw,19px); letter-spacing:.07em; color:#b9d8f7; text-transform:uppercase; }
+    .date { display:flex; gap:14px; align-items:center; } .dot { width:8px; height:8px; background:var(--sky); border-radius:50%; box-shadow:0 0 15px var(--sky); }
+    .clock { color:#fff; font-weight:700; font-variant-numeric:tabular-nums; }
+    main { position:relative; display:flex; align-items:center; min-height:0; }
+    .copy { width:58%; align-self:center; padding-bottom:5vh; position:relative; z-index:3; }
+    .eyebrow { color:#61c7ff; font-weight:700; letter-spacing:.2em; font-size:clamp(10px,1vw,15px); margin-bottom:18px; }
+    h1 { margin:0; font-size:clamp(48px,7.8vw,128px); letter-spacing:-.065em; line-height:.85; font-weight:800; text-transform:uppercase; text-shadow:0 10px 38px rgba(0,0,0,.25); }
+    h1 span { display:block; color:var(--sky); font-size:.33em; letter-spacing:.17em; margin:18px 0 0 .12em; }
+    .line { width:min(320px,70%); height:2px; background:linear-gradient(90deg,var(--sky),transparent); margin:31px 0 19px; }
+    .lead { margin:0; max-width:480px; color:#cce6fb; font-size:clamp(16px,1.45vw,23px); line-height:1.45; }
+    .safety { margin-top:23px; max-width:480px; padding:15px 18px; border-left:3px solid var(--gold); background:rgba(1,15,44,.34); color:#fff4d5; font-size:clamp(13px,1.12vw,17px); line-height:1.4; }
+    .safety b { color:#f6cc74; text-transform:uppercase; letter-spacing:.05em; }
+    .actions { display:flex; gap:12px; align-items:center; margin-top:22px; flex-wrap:wrap; }
+    .call { appearance:none; border:0; cursor:pointer; display:inline-flex; gap:10px; align-items:center; background:linear-gradient(105deg,#0b8eed,#4cc7ff); color:#fff; padding:14px 20px; border-radius:8px; text-decoration:none; text-transform:uppercase; font-weight:800; letter-spacing:.08em; font-size:12px; box-shadow:0 10px 25px rgba(0,133,241,.26); transition:transform .2s,filter .2s; }
+    .call:hover { transform:translateY(-2px); filter:brightness(1.1); } .call:focus-visible { outline:3px solid #fff; outline-offset:3px; }
+    .status { color:#9ed2f5; font-size:12px; letter-spacing:.04em; }
+    .portrait { position:absolute; right:0; bottom:0; width:min(47vw,710px); height:min(78vh,760px); z-index:1; }
+    .halo { position:absolute; width:72%; aspect-ratio:1; top:7%; right:5%; border-radius:50%; background:radial-gradient(circle,rgba(116,207,255,.39) 0,rgba(36,124,213,.17) 42%,transparent 68%); filter:blur(2px); }
+    .girl { position:absolute; right:7%; bottom:0; width:64%; height:90%; }
+    .head { position:absolute; width:29%; aspect-ratio:.82; left:37%; top:11%; border-radius:46% 46% 43% 43%; background:linear-gradient(98deg,#d69d77,#f1c2a1 51%,#c98562); z-index:4; box-shadow:inset -12px -5px 18px rgba(91,37,22,.15); }
+    .hair { position:absolute; width:34%; height:35%; left:34.5%; top:7%; border-radius:48% 48% 39% 42%; background:linear-gradient(110deg,#1b1115,#402325 72%,#160d14); z-index:3; }
+    .hair::after { content:""; position:absolute; left:2%; top:32%; width:98%; height:72%; border-radius:45%; border-left:16px solid #281518; }
+    .hat { position:absolute; width:42%; height:19%; left:30.5%; top:0; z-index:5; border-radius:60% 60% 22% 22%; background:linear-gradient(135deg,#eac677,#9b681d 45%,#f0ce7c 70%,#885316); border:4px solid #ffe7a4; box-shadow:0 0 0 5px #8a5a1c; }
+    .hat::before { content:"✦"; position:absolute; color:#fff3b7; font-size:clamp(22px,4vw,60px); left:36%; top:15%; text-shadow:0 0 12px #fff; }
+    .neck { position:absolute; z-index:2; width:18%; height:16%; left:42.5%; top:28%; background:#d69270; }
+    .body { position:absolute; bottom:0; left:14%; width:74%; height:61%; z-index:2; border-radius:45% 45% 0 0; background:linear-gradient(102deg,#0064b7,#0499e4 50%,#00509a); box-shadow:inset 20px 0 30px rgba(0,31,91,.3); overflow:hidden; }
+    .body::before { content:""; position:absolute; width:55%; height:100%; left:22%; top:0; background:repeating-linear-gradient(90deg,transparent 0 21px,rgba(235,191,93,.8) 22px 27px,transparent 28px 46px),linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent); clip-path:polygon(43% 0,57% 0,88% 100%,12% 100%); }
+    .body::after { content:"❖  ❖  ❖"; position:absolute; left:18%; top:21%; color:#f8d57c; letter-spacing:18px; font-size:clamp(20px,3vw,42px); transform:rotate(-7deg); opacity:.93; }
+    .ornament { position:absolute; bottom:9%; right:0; width:34%; color:rgba(245,203,112,.64); font-size:clamp(70px,10vw,160px); line-height:.65; transform:rotate(15deg); font-family:Georgia,serif; }
+    footer { border-top:1px solid rgba(164,213,255,.32); padding-top:20px; display:flex; justify-content:space-between; align-items:end; position:relative; z-index:5; }
+    footer small { color:#9dc9ee; font-size:clamp(10px,1vw,14px); letter-spacing:.12em; text-transform:uppercase; }
+    .hotline { text-align:right; line-height:.9; } .hotline span { display:block; color:#8fcaef; text-transform:uppercase; letter-spacing:.13em; font-size:clamp(10px,.9vw,14px); margin-bottom:7px; } .hotline strong { color:#fff; font-size:clamp(38px,5.6vw,86px); letter-spacing:-.06em; } .hotline a { color:inherit; text-decoration:none; }
+    .whatsapp { display:inline-flex; align-items:center; gap:8px; margin-top:17px; color:#eafff1; background:#21a864; border-radius:7px; padding:10px 15px; text-decoration:none; text-transform:uppercase; font-size:11px; font-weight:800; letter-spacing:.07em; box-shadow:0 8px 20px rgba(18,144,77,.2); transition:transform .2s,filter .2s; } .whatsapp:hover { transform:translateY(-2px); filter:brightness(1.08); }
+    .footer-right { text-align:right; } .footer-right .hotline { margin-bottom:0; }
+    @media (max-width:650px) { .screen { padding:22px 23px 20px; } header { font-size:11px; } .copy { width:100%; align-self:start; padding-top:11vh; } .portrait { width:95vw; height:53vh; opacity:.62; right:-14vw; } h1 { font-size:clamp(45px,15vw,75px); } .lead { font-size:15px; max-width:280px; } .safety { max-width:300px; font-size:12px; margin-top:17px; padding:11px 13px; } .actions { margin-top:15px; } footer { align-items:center; } footer small { max-width:105px; line-height:1.4; } .hotline strong { font-size:48px; } .whatsapp { font-size:9px; padding:9px 10px; } }
+  </style>
+</head>
+<body>
+  <section class="screen">
+    <header><div class="date"><i class="dot"></i><span id="date">09 сентября 2026</span></div><div class="clock" id="clock">00:00:00</div></header>
+    <main>
+      <div class="copy"><div class="eyebrow">Связь, которая объединяет</div><h1>Қазақтелеком</h1><div class="line"></div><p class="lead">Быстрый интернет, забота и надёжная связь — в каждом доме Казахстана.</p><div class="safety">При земляных работах наберите по номеру <b>1437</b>.<br><b>Берегите линию связи!</b></div><div class="actions"><a class="call" href="tel:1437" aria-label="Позвонить на горячую линию 1437">☎ Позвонить 1437</a><span class="status" id="status">Горячая линия доступна 24/7</span></div></div>
+      <div class="portrait" aria-label="Стилизованный образ молодой девушки в казахском национальном костюме"><div class="halo"></div><div class="girl"><div class="hair"></div><div class="head"></div><div class="hat"></div><div class="neck"></div><div class="body"></div></div><div class="ornament">❧</div></div>
+    </main>
+    <footer><small>Официальная поддержка<br>круглосуточно</small><div class="footer-right"><div class="hotline"><span>Горячая линия</span><strong><a href="tel:1437" aria-label="Позвонить 1437">1437</a></strong></div><a class="whatsapp" href="https://wa.me/?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%BE%D1%81%D1%82%D0%B0%D0%B2%D0%B8%D1%82%D1%8C%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D1%83." target="_blank" rel="noopener" aria-label="Оставить заявку в WhatsApp">◉ Оставить заявку по WhatsApp</a></div></footer>
+  </section>
+  <script>
+    const date = document.getElementById('date'), clock = document.getElementById('clock');
+    function tick(){ const now=new Date(); date.textContent=new Intl.DateTimeFormat('ru-RU',{day:'2-digit',month:'long',year:'numeric'}).format(now); clock.textContent=new Intl.DateTimeFormat('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'}).format(now); } tick(); setInterval(tick,1000);
+  </script>
+</body>
+</html>
